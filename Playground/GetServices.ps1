@@ -1,0 +1,1 @@
+Get-Service | Export-Csv -Path C:\temp\services.csv 

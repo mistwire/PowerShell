@@ -1,0 +1,33 @@
+$search = New-Object System.DirectoryServices.DirectoryServicesPermissionAccess
+
+$search.filter = "(servicePrincipalName=*)"
+
+$results = $search.FindAll()
+
+foreach($result in $results)
+
+{
+
+      $userEntry = $result.GetDirectoryEntry()
+
+      Write-host "Object Name = " $userEntry.name -backgroundcolor "yellow" -foregroundcolor "black"
+
+      Write-host "DN      =      "  $userEntry.distinguishedName
+
+      Write-host "Object Cat. = "  $userEntry.objectCategory
+
+      Write-host "servicePrincipalNames"
+
+      $i=1
+
+      foreach($SPN in $userEntry.servicePrincipalName)
+
+      {
+
+          Write-host "SPN(" $i ")   =      " $SPN       $i+=1
+
+      }
+
+      Write-host ""
+
+}
