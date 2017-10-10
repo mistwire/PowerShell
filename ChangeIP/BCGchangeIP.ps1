@@ -5,6 +5,8 @@ $GC = Get-Credential
 
 foreach ($vm in $vms){
 $VMName = $vm.Name
+$VMUSER = $vm.VMuser 
+$VMPASS = $vm.VMpass 
 $IP = $vm.IP
 $SNM = $vm.SubnetMask
 $GW = $vm.Gateway
@@ -41,10 +43,10 @@ $netsh2 = "c:\windows\system32\netsh.exe interface ip set dnsservers ""$NetworkN
 $netsh3 = "c:\windows\system32\netsh.exe interface ip add dnsservers ""$NetworkName"" $DNS2"
 #$netsh4 = "c:\windows\system32\netsh.exe interface ip set winsservers ""$NetworkName"" static $WINS1"
 #$netsh5 = "c:\windows\system32\netsh.exe interface ip add winsservers ""$NetworkName"" $WINS2"
-Invoke-VMScript -VM $VMname -GuestCredential $GC -ScriptType bat -ScriptText $netsh
-Invoke-VMScript -VM $VMname -GuestCredential $GC -ScriptType bat -ScriptText $netsh2
-Invoke-VMScript -VM $VMname -GuestCredential $GC -ScriptType bat -ScriptText $netsh3
-#Invoke-VMScript -VM $VMname -GuestCredential $GC -ScriptType bat -ScriptText $netsh4
-#Invoke-VMScript -VM $VMname -GuestCredential $GC -ScriptType bat -ScriptText $netsh5
+Invoke-VMScript -VM $VMname -GuestUser $VMUSER -GuestPassword $VMPASS -ScriptType bat -ScriptText $netsh
+Invoke-VMScript -VM $VMname -GuestUser $VMUSER -GuestPassword $VMPASS -ScriptType bat -ScriptText $netsh2
+Invoke-VMScript -VM $VMname -GuestUser $VMUSER -GuestPassword $VMPASS -ScriptType bat -ScriptText $netsh3
+#Invoke-VMScript -VM $VMname -GuestUser $VMUSER -GuestPassword $VMPASS -ScriptType bat -ScriptText $netsh4
+#Invoke-VMScript -VM $VMname -GuestUser $VMUSER -GuestPassword $VMPASS -ScriptType bat -ScriptText $netsh5
 Write-Host "Setting IP address completed." -ForegroundColor Green
 }
