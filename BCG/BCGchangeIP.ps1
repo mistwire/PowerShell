@@ -1,7 +1,8 @@
-﻿Connect-VIServer <IPaddress> -User administrator@vsphere.local -Password ******* -SaveCredentials
-$vms = @(Import-CSV "C:\Users\chris\Documents\GitHub\PowerShell\ChangeIP\NewVMs.csv")
+﻿$GC = Get-Credential
+Connect-VIServer 192.168.1.14 -Credential $GC -SaveCredentials
+$vms = @(Import-CSV "C:\Users\chris\Documents\GitHub\PowerShell\BCG\NewVMs.csv")
 #$GC1 = $Host.UI.PromptForCredential("Please enter credentials", "Enter Guest credentials for VM", "Administrator", "")
-#$GC = Get-Credential
+
 
 foreach ($vm in $vms){
 $VMName = $vm.Name
