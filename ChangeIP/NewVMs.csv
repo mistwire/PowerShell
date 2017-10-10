@@ -1,2 +1,0 @@
-Name,Template,Cluster,Datastore,Customization,vCPU,Memory,Network,HardDrive,HardDrive2,DiskFormat,Location,IP,SubnetMask,Gateway,DNS1,DNS2,WINS1,WINS2,TicketNumber,Description,FunctionCode,Agency,Application,Billed,Contact,ContactPhone,Managed,RebootPolicy,OU
-PuppetWinAgent,,,,,,,,,,,,192.168.1.27,255.255.255.0,192.168.1.1,8.8.8.8,192.168.1.12,,,,,,,,,,,,,

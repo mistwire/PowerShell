@@ -1,7 +1,7 @@
-﻿Connect-VIServer 192.168.1.14 -User administrator@vsphere.local -Password ***** -SaveCredentials
-$vms = @(Import-CSV "C:\Users\chris\Documents\GitHub\PowerCLI\ChangeIP\NewVMs.csv")
+﻿Connect-VIServer <IPaddress> -User administrator@vsphere.local -Password ******* -SaveCredentials
+$vms = @(Import-CSV "C:\Users\chris\Documents\GitHub\PowerShell\ChangeIP\NewVMs.csv")
 #$GC1 = $Host.UI.PromptForCredential("Please enter credentials", "Enter Guest credentials for VM", "Administrator", "")
-$GC = Get-Credential
+#$GC = Get-Credential
 
 foreach ($vm in $vms){
 $VMName = $vm.Name
@@ -19,7 +19,8 @@ $Template = $vm.Template
  
 DO {(Get-VMGuest $VMName).HostName}
 while (((Get-VMGuest $VMName).HostName) -Ne "$VMName")
- 
+
+'''
 Get-VM $VMName | Update-Tools
 
 DO {
@@ -32,8 +33,8 @@ Write-host "Still checking for VMWare Tools on"$VMName -ForegroundColor Yellow
 }
 While ($VMToolStatus -ne "guestToolsRunning")
 Write-Host "VMWare tools are now running on"$VMName -ForegroundColor Green
- 
-$Network = Invoke-VMScript -VM $VMName -ScriptType Powershell -ScriptText "(gwmi Win32_NetworkAdapter -filter 'netconnectionid is not null').netconnectionid" -GuestCredential $GC
+ '''
+$Network = Invoke-VMScript -VM $VMName -ScriptType Powershell -ScriptText "(gwmi Win32_NetworkAdapter -filter 'netconnectionid is not null').netconnectionid" -GuestUser $VMUSER -GuestPassword $VMPASS
 $NetworkName = $Network.ScriptOutput
 $NetworkName = $Networkname.trim()
 
