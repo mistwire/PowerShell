@@ -18,8 +18,8 @@ $WINS2 = $vm.WINS2
 $Network = $vm.Network
 $Template = $vm.Template
  
-DO {(Get-VMGuest $VMName).HostName}
-while (((Get-VMGuest $VMName).HostName) -Ne "$VMName")
+#DO {(Get-VMGuest $VMName).HostName}
+#while (((Get-VMGuest $VMName).HostName) -Ne "$VMName")
 
 '''
 Get-VM $VMName | Update-Tools
